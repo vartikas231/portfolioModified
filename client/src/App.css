@@ -1,0 +1,957 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000000;
+  color: #e0e0ff;
+  position: relative;
+  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(1px 1px at 10% 10%, white, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 20% 20%, white, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 30% 30%, white, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 40% 40%, white, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 50% 50%, white, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 60% 60%, white, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 70% 70%, white, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 80% 80%, white, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 90% 90%, white, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 15% 15%, white, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 35% 35%, white, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 55% 55%, white, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 75% 75%, white, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 95% 95%, white, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  animation: twinkle 4s infinite alternate, moveStars 200s linear infinite;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes moveStars {
+  from { background-position: 0 0; }
+  to { background-position: -300px 300px; }
+}
+
+.main-container,
+.contact,
+.main-title {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: left;  /* Align content to the left */
+}
+
+.title {
+  letter-spacing: 0.1rem;
+  font-style: italic;
+  border-bottom: 0.2px solid #74b1d9;
+  color: #4a9dd3;
+  margin: 0;
+  margin-bottom: 20px;
+  max-width: 100%;  /* Allow it to take full width of its container */
+  font-size: 1.4rem;
+  text-align: left;
+  padding-bottom: 5px;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #9b59d1;
+}
+
+/* ...............Header............... */
+
+:root {
+  --neon-pink: #ff71ce;
+  --neon-blue: #01cdfe;
+  --neon-purple: #b967ff;
+  --neon-green: #05ffa1;
+  --dark-bg: #1a1a1a;
+}
+
+.header {
+  width: 100%;
+  height: 100px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(45deg, 
+      rgba(1, 205, 254, 0.5) 0%, 
+      rgba(255, 113, 206, 0.5) 50%, 
+      rgba(5, 255, 161, 0.5) 100%
+    );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.fullname {
+  position: absolute;
+  top: 6rem;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.fullname h1 {
+  color: white;
+  letter-spacing: 0.2rem;
+  font-style: normal;
+  text-shadow: 
+    0 0 10px var(--neon-blue),
+    0 0 20px var(--neon-blue),
+    0 0 30px var(--neon-blue);
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+/* Modern CV Button */
+.cv {
+  position: absolute;
+  z-index: 2;
+  top: 3rem;
+  right: 1rem;
+  padding: 12px 24px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--neon-blue);
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(1, 205, 254, 0.3);
+  transition: all 0.3s ease;
+}
+
+.cv:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 0 20px rgba(1, 205, 254, 0.5),
+    0 0 40px rgba(1, 205, 254, 0.3);
+  border-color: var(--neon-pink);
+}
+
+/* Personal Info Card */
+.personalInfo {
+  position: relative;
+  background: rgba(26, 26, 26, 0.95);
+  border: 1px solid var(--neon-purple);
+  box-shadow: 
+    0 0 20px rgba(185, 103, 255, 0.3),
+    inset 0 0 20px rgba(185, 103, 255, 0.2);
+  backdrop-filter: blur(20px);
+  margin: -100px auto 0;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 600px;
+  width: 90%;
+}
+
+.personalInfo-center {
+  background: linear-gradient(135deg,
+    rgba(185, 103, 255, 0.1),
+    rgba(1, 205, 254, 0.1)
+  );
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.personalInfo-details {
+  width: 100%;
+}
+
+.personalInfo-details .info {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(185, 103, 255, 0.3);
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.personalInfo-details .info:hover {
+  transform: translateX(10px);
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 15px rgba(1, 205, 254, 0.3);
+}
+
+.personalInfo-details .info label {
+  color: var(--neon-blue);
+  font-weight: 500;
+  font-family: 'Courier New', monospace;
+  min-width: 120px;
+}
+
+.personalInfo-details .info h4 {
+  color: var(--neon-pink);
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  flex-grow: 1;
+  text-align: right;
+}
+
+/* Animations */
+@keyframes glow {
+  from {
+    text-shadow: 
+      0 0 10px var(--neon-blue),
+      0 0 20px var(--neon-blue),
+      0 0 30px var(--neon-blue);
+  }
+  to {
+    text-shadow: 
+      0 0 20px var(--neon-blue),
+      0 0 30px var(--neon-blue),
+      0 0 40px var(--neon-blue);
+  }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Add terminal-like typing effect */
+.personalInfo-details .info::before {
+  content: '>';
+  color: var(--neon-green);
+  margin-right: 10px;
+  font-family: 'Courier New', monospace;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .personalInfo {
+    width: 95%;
+    margin-top: -50px;
+  }
+  
+  .personalInfo-details .info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .personalInfo-details .info h4 {
+    text-align: left;
+    margin-top: 5px;
+  }
+}
+/* ............end of header.............. */
+
+/* .................start of about........ */
+:root {
+  --bg-color: #000000; /* Pure black background */
+  --text-color: #e0e0ff; /* Soft white with blue tint */
+  --accent-color: #9b59d1; /* Mystical purple */
+  --hover-color: #bd93f9; /* Lighter purple */
+  --border-color: rgba(155, 89, 209, 0.3); /* Semi-transparent purple */
+  --text-primary: #f8f8ff; /* Ghost white for main text */
+  --text-secondary: #b8b8ff; /* Lighter purple-tinted white for secondary text */
+}
+
+.about {
+  margin: 15px 0;
+  padding: 10px;
+  animation: fadeIn 0.8s ease;
+}
+
+.about-info {
+  background: rgba(10, 10, 15, 0.4); /* Very subtle dark overlay */
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 15px rgba(155, 89, 209, 0.15);
+}
+
+.about-info p {
+  font-size: 0.95rem;
+  color: var(--text-primary); /* Bright, clear text */
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-family: 'Roboto Mono', 'Courier New', monospace;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.1); /* Subtle text glow */
+}
+
+/* Tech-inspired decorative elements with enhanced visibility */
+.about-info::before {
+  content: '<about>';
+  display: block;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--accent-color);
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  opacity: 0.8;
+  text-shadow: 0 0 8px rgba(155, 89, 209, 0.5);
+}
+
+.about-info::after {
+  content: '</about>';
+  display: block;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--accent-color);
+  font-size: 0.8rem;
+  margin-top: 10px;
+  opacity: 0.8;
+  text-shadow: 0 0 8px rgba(155, 89, 209, 0.5);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced hover effect for black background */
+.about-info:hover {
+  box-shadow: 0 0 20px rgba(155, 89, 209, 0.25);
+  transition: all 0.3s ease;
+  background: rgba(10, 10, 15, 0.5); /* Slightly more visible on hover */
+}
+
+/* Optional: Add a subtle gradient text effect */
+.about-info p strong {
+  background: linear-gradient(45deg, var(--text-primary), var(--accent-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+  .about-info {
+    padding: 15px;
+  }
+  
+  .about-info p {
+    font-size: 0.9rem;
+  }
+}
+
+/* .................end of about............ */
+
+/* ..........Education .....................*/
+
+
+:root {
+  --bg-color: #000000;
+  --text-color: #e0e0ff;
+  --accent-color: #9b59d1;
+  --hover-color: #bd93f9;
+  --border-color: rgba(155, 89, 209, 0.3);
+  --text-primary: #f8f8ff;
+  --text-secondary: #b8b8ff;
+}
+
+.education-admin {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: var(--text-color);
+  animation: fadeIn 0.8s ease;
+}
+
+.title {
+  color: var(--accent-color);
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  font-family: 'Roboto Mono', 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(155, 89, 209, 0.5);
+}
+
+.form-container {
+  background: rgba(10, 10, 15, 0.4);
+  padding: 25px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 15px rgba(155, 89, 209, 0.15);
+}
+
+.education-form label {
+  color: var(--text-primary);
+  font-family: 'Roboto Mono', 'Courier New', monospace;
+  margin-bottom: 10px;
+}
+
+.education-form input[type="text"] {
+  background: rgba(10, 10, 15, 0.6);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  width: 100%;
+  margin-bottom: 20px;
+  font-family: 'Roboto Mono', 'Courier New', monospace;
+}
+
+.education-form input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 15px rgba(155, 89, 209, 0.25);
+}
+
+.submit-btn {
+  background: var(--accent-color);
+  color: var(--text-primary);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Roboto Mono', 'Courier New', monospace;
+}
+
+.submit-btn:hover {
+  background: var(--hover-color);
+  box-shadow: 0 0 20px rgba(155, 89, 209, 0.4);
+}
+
+.education-list {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.education-item {
+  background: rgba(10, 10, 15, 0.4);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 15px rgba(155, 89, 209, 0.15);
+  transition: all 0.3s ease;
+}
+
+.education-item:hover {
+  box-shadow: 0 0 20px rgba(155, 89, 209, 0.25);
+  background: rgba(10, 10, 15, 0.5);
+}
+
+.icons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.edit-icon, .delete-icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-secondary);
+}
+
+.edit-icon:hover, .delete-icon:hover {
+  color: var(--accent-color);
+  text-shadow: 0 0 8px rgba(155, 89, 209, 0.5);
+}
+
+.single-education {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+  font-family: 'Roboto Mono', 'Courier New', monospace;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+
+.message-alert {
+  background: rgba(10, 10, 15, 0.4);
+  color: var(--accent-color);
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  margin-top: 15px;
+  border: 1px solid var(--border-color);
+  font-family: 'Roboto Mono', 'Courier New', monospace;
+}
+
+.error {
+  color: #ff5555;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .education-item {
+    padding: 15px;
+  }
+  
+  .single-education {
+    font-size: 0.9rem;
+  }
+}
+
+/* .....................end of education................. */
+
+/* .......................start of projects................. */
+
+/* Project Card Styles */
+.single-project {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Even numbered projects - Image on right */
+.single-project:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+/* Odd numbered projects - Image on left */
+.single-project:nth-child(odd) {
+  flex-direction: row;
+}
+
+.single-project:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Image Styles */
+.single-project-img {
+  width: 40%;
+  min-width: 250px;
+  max-width: 400px;
+  height: auto;
+  min-height: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+.single-project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* Fallback for missing images */
+.single-project-img img:not([src]), 
+.single-project-img img[src=""], 
+.single-project-img img[src="null"] {
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.single-project-img img:not([src])::after, 
+.single-project-img img[src=""]::after, 
+.single-project-img img[src="null"]::after {
+  content: '🖼️ No Image Available';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.9rem;
+  color: #ffffff;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Project Info Styles */
+.single-project-info {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centers content vertically */
+}
+
+.single-project-info h3 {
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.single-project-info p {
+  color: #e0e0e0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.single-project-info a {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background: var(--accent-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.single-project-info a:hover {
+  background: #8445b8;
+  transform: translateY(-2px);
+}
+
+/* Icons for edit and delete */
+.icons {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.8rem;
+  z-index: 2;
+}
+
+.icons i {
+  width: 35px;
+  height: 35px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.icons .fa-edit:hover {
+  background: var(--accent-color);
+  transform: scale(1.1);
+}
+
+.icons .fa-trash:hover {
+  background: #ff4757;
+  transform: scale(1.1);
+}
+
+/* Text alignment based on image position */
+.single-project:nth-child(even) .single-project-info {
+  text-align: right;
+}
+
+.single-project:nth-child(even) .single-project-info a {
+  align-self: flex-end;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .single-project,
+  .single-project:nth-child(even),
+  .single-project:nth-child(odd) {
+    flex-direction: column;
+  }
+
+  .single-project-img {
+    width: 100%;
+    height: 200px;
+  }
+
+  .single-project-info {
+    padding: 1rem;
+    text-align: left !important; /* Force left alignment on mobile */
+  }
+
+  .single-project-info h3 {
+    font-size: 1.1rem;
+  }
+
+  .single-project-info p {
+    font-size: 0.85rem;
+  }
+
+  .single-project:nth-child(even) .single-project-info a {
+    align-self: flex-start;
+  }
+}
+
+/* Message Styles */
+.item-delete-tab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 0.8rem 1.5rem;
+  background: #4CAF50;
+  color: white;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.new-delete {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+:root {
+  --accent-color: #9b59d1;
+}
+/* .........................end of project................... */
+
+
+
+/*...........................experience...................... */
+
+
+
+
+
+
+.experience-center{
+  margin-top:20px;
+
+}
+
+
+.single-experience{
+  margin-bottom: 20px;
+  width: 100%;
+  font-size:18px ;
+  color: rgb(255, 255, 255);
+  padding:5px 10px;
+  letter-spacing: 0.1rem;
+  background:rgb(191,192,192) ;
+  color: #424242;
+}
+
+
+@media screen and (min-width:860px) {
+  .experience-center{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+  }
+
+
+  .single-experience{
+    flex: 0 0 calc(50% - 20px);
+    margin-right: 0 ;
+    margin-left: 0;
+    padding: 10px;
+  }
+}
+
+
+/*...........................experience...................... */
+
+
+
+
+
+
+/* ..........................footer........................... */
+
+
+:root {
+  --footer-bg: #0a0a0f; /* Dark background matching navbar */
+  --footer-text: #e0e0ff; /* Soft white with blue tint */
+  --footer-accent: #9b59d1; /* Mystical purple */
+  --footer-hover: #bd93f9; /* Lighter purple */
+  --footer-muted: #8e7cc3; /* Muted purple */
+}
+
+.vs-footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 2rem 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(155, 89, 209, 0.2); /* Purple glow at top */
+}
+
+/* Magical stars background */
+.vs-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
+  background-size: 550px 550px, 350px 350px, 250px 250px;
+  background-position: 0 0, 40px 60px, 130px 270px;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.vs-footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.vs-footer-section {
+  text-align: center;
+}
+
+.vs-footer-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--footer-accent);
+  text-shadow: 0 0 10px var(--footer-accent);
+  font-weight: bold;
+}
+
+.vs-footer-social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.vs-footer-social-link {
+  color: var(--footer-text);
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Magical hover effect for social links */
+.vs-footer-social-link:hover {
+  color: var(--footer-hover);
+  transform: translateY(-3px);
+  text-shadow: 0 0 15px var(--footer-hover);
+}
+
+.vs-footer-social-link::before {
+  content: '✦';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: 0.3s;
+  color: var(--footer-accent);
+}
+
+.vs-footer-social-link:hover::before {
+  opacity: 1;
+  top: -20px;
+}
+
+.vs-footer-bottom {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(155, 89, 209, 0.2);
+  position: relative;
+}
+
+.vs-footer-copyright {
+  font-size: 0.9rem;
+  color: var(--footer-muted);
+  text-shadow: 0 0 5px var(--footer-muted);
+}
+
+/* Magical decorative elements */
+.vs-footer-tech-decoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 20px;
+}
+
+.vs-footer-circuit-line {
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--footer-accent),
+    transparent
+  );
+  opacity: 0.3;
+}
+
+.vs-footer-circuit-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--footer-accent);
+  box-shadow: 0 0 10px var(--footer-accent);
+  opacity: 0.5;
+  animation: glowPulse 2s infinite;
+}
+
+@keyframes glowPulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0.3; }
+}
+
+@media (max-width: 768px) {
+  .vs-footer-social-links {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .vs-footer-title {
+    font-size: 1.3rem;
+  }
+}
+/* ........................end of footer..................... */
+
+

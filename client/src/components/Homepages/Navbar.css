@@ -1,0 +1,145 @@
+:root {
+  --primary-color: #9b59d1; /* Mystical purple */
+  --secondary-color: #2c1810; /* Dark brown */
+  --text-color: #e0e0ff; /* Soft white with blue tint */
+  --hover-color: #bd93f9; /* Lighter purple */
+  --bg-color: #0a0a0f; /* Very dark blue-black */
+}
+
+.nav-container {
+  background-color: rgba(10, 10, 15, 0.95);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 10px 20px;
+  box-shadow: 0 2px 15px rgba(155, 89, 209, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.logoBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logoBtn a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+.logoBtn span {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.btn {
+  display: none; /* Hide by default, show in mobile view */
+}
+
+.links {
+  display: flex;
+}
+
+.links ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.links li {
+  margin: 0 15px;
+}
+
+.links li a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.links li a:hover {
+  color: var(--hover-color);
+}
+
+.icon-button {
+  margin-left: 10px;
+}
+
+.icon-button a {
+  padding: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+  .btn {
+    display: block;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px;
+  }
+
+  .bar1, .bar2, .bar3 {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+
+  .animateBar .bar1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .animateBar .bar2 {opacity: 0;}
+
+  .animateBar .bar3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  .links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-color);
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 0;
+    box-shadow: 0 2px 15px rgba(155, 89, 209, 0.2);
+  }
+
+  .new-links {
+    display: flex;
+  }
+
+  .links ul {
+    flex-direction: column;
+  }
+
+  .links li {
+    margin: 10px 0;
+  }
+}

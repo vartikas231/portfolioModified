@@ -1,0 +1,73 @@
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+  }
+  
+  .education {
+    margin-bottom: 30px;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .education-center {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Reduced gap between items */
+  }
+  
+  .single-education {
+    background: rgba(10, 10, 15, 0.2);
+    border-radius: 6px;
+    padding: 12px 15px; /* Reduced padding */
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+  
+  .single-education:hover {
+    background: rgba(10, 10, 15, 0.3);
+    box-shadow: 0 0 10px rgba(155, 89, 209, 0.15);
+  }
+  
+  .education-indicator {
+    background-color: transparent; /* Removed background */
+    color: var(--accent-color);
+    font-size: 0.9rem; /* Smaller font size */
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  
+  .education-content {
+    flex-grow: 1;
+  }
+  
+  .education-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .education-title {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .title {
+      font-size: 1.5rem;
+    }
+  
+    .single-education {
+      padding: 10px 12px;
+    }
+  
+    .education-title {
+      font-size: 0.9rem;
+    }
+  }
