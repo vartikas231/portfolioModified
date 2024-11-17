@@ -1,99 +1,129 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import "./edit.css";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const EditExperience = () => {
-  const [experience, setExperience] = useState({
-    role: "",
-    company: "",
-    duration: "",
-    description: "",
-    skillsUsed: "",
-    achievements: ""
-  });
-  const [message, setMessage] = useState("");
-  const navigate = useNavigate();
-  const { id } = useParams();
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const [experience, setExperience] = useState({
+        role: "",
+        company: "",
+        duration: "",
+        description: "",
+        skillsUsed: "",
+        achievements: ""
+    });
+    const [error, setError] = useState("");
 
-  useEffect(() => {
-    const fetchExperience = async () => {
-      try {
-        const response = await axios.get(`http://localhost:2000/experience/${id}`);
-        if (response.data) {
-          setExperience({
-            ...response.data,
-            skillsUsed: response .data.skillsUsed.join(', '),
-            achievements: response.data.achievements.join('\n')
-          });
-        }
-      } catch (error) {
-        console.error("Error fetching experience:", error);
-        setMessage("Error fetching experience data");
-      }
+    useEffect(() => {
+        const fetchExperience = async () => {
+            try {
+                const response = await axios.get(`http://localhost:2000/experience/${id}`);
+                const data = response.data;
+                setExperience({
+                    ...data,
+                    skillsUsed: Array.isArray(data.skillsUsed) 
+                        ? data.skillsUsed.join(', ') 
+                        : data.skillsUsed,
+                    achievements: Array.isArray(data.achievements) 
+                        ? data.achievements.join('\n') 
+                        : data.achievements
+                });
+            } catch (error) {
+                console.error("Error fetching experience:", error);
+                setError("Failed to fetch experience details");
+            }
+        };
+
+        fetchExperience();
+    }, [id]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setExperience(prev => ({
+            ...prev,
+            [name]: value
+        }));
     };
 
-    if (id) {
-      fetchExperience();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const updateData = {
+                ...experience,
+                skillsUsed: experience.skillsUsed.split(',').map(skill => skill.trim()),
+                achievements: experience.achievements.split('\n').filter(item => item.trim() !== '')
+            };
+
+            const response = await axios.put(`http://localhost:2000/experience/${id}`, updateData);
+            
+            if (response.data) {
+                navigate('/experiences-admin'); // Redirect after successful update
+            }
+        } catch (error) {
+            console.error("Error updating experience:", error);
+            setError("Failed to update experience");
+        }
+    };
+
+    if (error) {
+        return <div className="error-message">{error}</div>;
     }
-  }, [id]);
 
-  const onchangeExperience = (e) => {
-    setExperience({ ...experience, [e.target.name]: e.target.value });
-  };
-
-  const updateExperience = async (e) => {
-    e.preventDefault();
-    
-    try {
-      const postExperience = {
-        ...experience,
-        skillsUsed: experience.skillsUsed.split(',').map(skill => skill.trim()),
-        achievements: experience.achievements.split('\n').filter(item => item.trim() !== '')
-      };
-
-      const response = await axios.put(
-        `http://localhost:2000/experience/update/${id}`,
-        postExperience
-      );
-
-      setMessage(response.data.msg);
-      
-      setTimeout(() => {
-        navigate("/admin");
-      }, 2000);
-    } catch (error) {
-      console.error("Error updating experience:", error);
-      setMessage("Error updating experience");
-    }
-  };
-
-  return (
-    <div className="edit">
-      <div className="main-container">
-        <div className="same-component">
-          <div className="same-form">
-            <form onSubmit={updateExperience}>
-              {message && <div className="updated">{message}</div>}
-              <h4>Experience Component</h4>
-              <input type="text" name="role" placeholder="Role" onChange={onchangeExperience} value={experience.role} required />
-              <input type="text" name="company" placeholder="Company" onChange={onchangeExperience} value={experience.company} required />
-              <input type="text" name="duration" placeholder="Duration" onChange={onchangeExperience} value={experience.duration} required />
-              <textarea name="description" placeholder="Description" onChange={onchangeExperience} value={experience.description} required />
-              <input type="text" name="skillsUsed" placeholder="Skills Used (comma-separated)" onChange={onchangeExperience} value={experience.skillsUsed} />
-              <textarea name="achievements" placeholder="Achievements (one per line)" onChange={onchangeExperience} value={experience.achievements} />
-              <div className="btns">
-                <button type="submit">Update Experience</button>
-                <Link to="/admin">
-                  <button type="button" className="cancel-btn">Cancel</button>
-                </Link>
-              </div>
-            </form>
-          </div>
+    return (
+        <div className="admin-experience-container">
+            <div className="admin-experience-form">
+                <form onSubmit={handleSubmit}>
+                    <h4 className="form-title">Edit Experience</h4>
+                    <input
+                        type="text"
+                        name="role"
+                        value={experience.role}
+                        onChange={handleChange}
+                        placeholder="Role"
+                        required
+                    />
+                    <input
+                        type="text"
+                        name="company"
+                        value={experience.company}
+                        onChange={handleChange}
+                        placeholder="Company"
+                        required
+                    />
+                    <input
+                        type="text"
+                        name="duration"
+                        value={experience.duration}
+                        onChange={handleChange}
+                        placeholder="Duration"
+                        required
+                    />
+                    <textarea
+                        name="description"
+                        value={experience.description}
+                        onChange={handleChange}
+                        placeholder="Description"
+                        required
+                    />
+                    <input
+                        type="text"
+                        name="skillsUsed"
+                        value={experience.skillsUsed}
+                        onChange={handleChange}
+                        placeholder="Skills Used (comma-separated)"
+                    />
+                    <textarea
+                        name="achievements"
+                        value={experience.achievements}
+                        onChange={handleChange}
+                        placeholder="Achievements (one per line)"
+                    />
+                    <button type="submit">Update Experience</button>
+                </form>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default EditExperience;

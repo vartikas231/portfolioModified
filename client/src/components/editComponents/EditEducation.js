@@ -1,68 +1,91 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const EditEducation = () => {
-  const [education, setEducation] = useState("");
-  const [message, setMessage] = useState("");
-  const navigate = useNavigate();
+  const [education, setEducation] = useState('');
+  const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:2000/education/${id}`)
-      .then((res) => {
-        setEducation(res.data.education);
-      })
-      .catch((err) => console.log(err));
+    const fetchEducation = async () => {
+      try {
+        const response = await axios.get(`http://localhost:2000/education/${id}`);
+        setEducation(response.data.education);
+      } catch (error) {
+        console.error('Error fetching education:', error);
+        setMessage('Error fetching education details');
+      }
+    };
+
+    fetchEducation();
   }, [id]);
 
-  const onchangeEducation = (e) => {
-    setEducation(e.target.value);
-  };
-
-  const updateEducation = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const postEducation = {
-      education,
-    };
+    setIsLoading(true);
     
-    axios
-      .put(`http://localhost:2000/education/${id}`, postEducation)
-      .then((res) => {
-        setMessage(res.data.msg);
-        setTimeout(() => {
-          navigate("/admin");
-        }, 2000);
-      })
-      .catch((err) => console.log(err));
+    try {
+      // Using your existing update route
+      const response = await axios.put(
+        `http://localhost:2000/education/update/${id}`,
+        { education }
+      );
+
+      setMessage('Education updated successfully');
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
+    } catch (error) {
+      console.error('Error updating education:', error);
+      setMessage(error.response?.data?.msg || 'Error updating education');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="edit">
-      <div className="main-container">
-        <div className="same-component">
-          <div className="same-form">
-            <form onSubmit={updateEducation}>
-              {message && <h3 className="updated">{message}</h3>}
-              <h4>Education component</h4>
-              <label htmlFor="text">Education</label>
-              <input
-                type="text"
-                value={education}
-                onChange={onchangeEducation}
-                required
-              />
-              <div className="btns">
-                <button type="submit">Update item</button>
-                <Link to="/admin">
-                  <button type="button" className="cancel-btn">Cancel</button>
-                </Link>
-              </div>
-            </form>
+    <div className="edit-education">
+      <h1 className="title">Edit Education</h1>
+      <div className="form-container">
+        <form onSubmit={handleSubmit} className="education-form">
+          <label htmlFor="education">Education</label>
+          <input
+            type="text"
+            id="education"
+            value={education || ''}
+            onChange={(e) => setEducation(e.target.value)}
+            placeholder="Enter your education"
+            required
+            disabled={isLoading}
+          />
+          <div className="button-group">
+            <button 
+              type="submit" 
+              className="submit-btn"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Updating...' : 'Update Education'}
+            </button>
+            <button
+              type="button"
+              className="cancel-btn"
+              onClick={() => navigate('/')}
+              disabled={isLoading}
+            >
+              Cancel
+            </button>
           </div>
-        </div>
+        </form>
       </div>
+
+      {message && (
+        <div className={`message-alert ${message.includes('Error') ? 'error' : 'success'}`}>
+          {message}
+        </div>
+      )}
     </div>
   );
 };

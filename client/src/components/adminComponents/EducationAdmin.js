@@ -63,10 +63,11 @@ const EducationAdmin = () => {
   };
 
   return (
-    <div className="education-admin">
-      <h1 className="title">Education Management</h1>
-      <div className="form-container">
-        <form onSubmit={handleSubmit} className="education-form">
+    <div className="edu-admin-container">
+      <h1 className="edu-admin-title">Education Management</h1>
+      
+      <div className="edu-form-wrapper">
+        <form onSubmit={handleSubmit} className="edu-input-form">
           <label htmlFor="education">Education</label>
           <input
             type="text"
@@ -76,30 +77,34 @@ const EducationAdmin = () => {
             placeholder="Enter your education"
             required
           />
-          <button type="submit" className="submit-btn">Add Item</button>
+          <button type="submit" className="edu-submit-button">Add Item</button>
         </form>
       </div>
 
-      <div className="education-list">
+      <div className="edu-items-container">
         {educationData.map((item) => (
-          <div className="education-item" key={item._id}>
-            <div className="icons">
-              <Link to={`/editEducation/${item._id}`} className="edit-icon">
-                <i className="fas fa-edit"></i>
+          <div className="edu-item-wrapper" key={item._id}>
+            <div className="edu-item-content">
+              <p className="edu-item-text">{item.education}</p>
+            </div>
+            <div className="edu-item-actions">
+              <Link 
+                to={`/editEducation/${item._id}`} 
+                className="edu-edit-link"
+              >
+                <i className="fas fa-edit edu-edit-icon"></i>
               </Link>
               <i
-                className="fas fa-trash delete-icon"
+                className="fas fa-trash edu-delete-icon"
                 onClick={() => deleteEducation(item._id)}
               ></i>
-            </div>
-            <div className="single-education">
-              <p>{item.education}</p>
             </div>
           </div>
         ))}
       </div>
+      
       {message && (
-        <div className={`message-alert ${messageCond ? 'success' : 'error'}`}>
+        <div className={`edu-message-alert ${messageCond ? 'edu-success' : 'edu-error'}`}>
           {message}
         </div>
       )}

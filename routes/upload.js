@@ -9,6 +9,17 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
+// Middleware for file validation
+const validateFile = (file) => {
+  const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+  if (!validTypes.includes(file.mimetype)) {
+    throw new Error('Invalid file format. Only JPG, JPEG, and PNG are allowed');
+  }
+  if (file.size > 1024 * 1024) {
+    throw new Error('File size is too big (max 1MB)');
+  }
+};
+
 router.post('/upload', async (req, res) => {
   try {
     console.log('Upload endpoint hit');
@@ -26,55 +37,28 @@ router.post('/upload', async (req, res) => {
       tempFilePath: file.tempFilePath
     });
 
-    if (file.size > 1024 * 1024) {
-      removeTmp(file.tempFilePath);
-      return res.status(400).json({ msg: 'File size is too big (max 1MB)' });
-    }
+    // Validate file
+    validateFile(file);
 
-    const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-    if (!validTypes.includes(file.mimetype)) {
-      removeTmp(file.tempFilePath);
-      return res.status(400).json({ 
-        msg: 'Invalid file format. Only JPG, JPEG, and PNG are allowed' 
-      });
-    }
+    // Upload to Cloudinary
+    const result = await cloudinary.uploader.upload(file.tempFilePath, { folder: "udemy" });
 
-    try {
-      const result = await new Promise((resolve, reject) => {
-        cloudinary.uploader.upload(
-          file.tempFilePath,
-          { folder: "udemy" },
-          (err, result) => {
-            if (err) reject(err);
-            else resolve(result);
-          }
-        );
-      });
-
-      removeTmp(file.tempFilePath);
-      return res.json({ 
-        public_id: result.public_id, 
-        url: result.secure_url 
-      });
-
-    } catch (uploadError) {
-      console.error('Cloudinary upload error:', uploadError);
-      removeTmp(file.tempFilePath);
-      return res.status(500).json({ 
-        msg: 'Error uploading to Cloudinary',
-        error: uploadError.message 
-      });
-    }
+    return res.json({ 
+      public_id: result.public_id, 
+      url: result.secure_url 
+    });
 
   } catch (error) {
-    console.error('Server error:', error);
-    if (req.files?.file?.tempFilePath) {
-      removeTmp(req.files.file.tempFilePath);
-    }
+    console.error('Error during upload:', error.message);
     return res.status(500).json({ 
       msg: 'Server error during upload',
       error: error.message 
     });
+  } finally {
+    // Clean up temporary file
+    if (req.files?.file?.tempFilePath) {
+      removeTmp(req.files.file.tempFilePath);
+    }
   }
 });
 

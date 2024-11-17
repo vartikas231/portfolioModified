@@ -697,45 +697,179 @@ a {
 /*...........................experience...................... */
 
 
+/* admin.css */
 
-
-
-
-.experience-center{
-  margin-top:20px;
-
+.same-component {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
+.same-form {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 30px;
+}
 
-.single-experience{
+.same-form h4 {
+  text-align: center;
   margin-bottom: 20px;
-  width: 100%;
-  font-size:18px ;
-  color: rgb(255, 255, 255);
-  padding:5px 10px;
-  letter-spacing: 0.1rem;
-  background:rgb(191,192,192) ;
-  color: #424242;
+  color: #333;
+  font-size: 1.5rem;
 }
 
+.same-form input,
+.same-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
 
-@media screen and (min-width:860px) {
-  .experience-center{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.same-form input:focus,
+.same-form textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
 
-  }
+.same-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
 
+.same-form button:hover {
+  background-color: #0056b3;
+}
 
-  .single-experience{
-    flex: 0 0 calc(50% - 20px);
-    margin-right: 0 ;
-    margin-left: 0;
+.same-item {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.experience-info {
+  display: grid;
+  gap: 20px;
+}
+
+.same-admin {
+  position: relative;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.same-admin:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.icons {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  gap: 15px;
+}
+
+.icons i {
+  cursor: pointer;
+  color: #6c757d;
+  transition: color 0.3s ease;
+}
+
+.icons i.fa-edit:hover {
+  color: #28a745;
+}
+
+.icons i.fa-trash:hover {
+  color: #dc3545;
+}
+
+.single-experience {
+  margin-top: 10px;
+}
+
+.single-experience h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.single-experience p {
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.single-experience ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.single-experience li {
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.item-delete-tab {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #dff0d8;
+  color: #3c763d;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .same-component {
     padding: 10px;
   }
+
+  .same-form,
+  .same-item {
+    padding: 15px;
+  }
+
+  .icons {
+    position: static;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
 }
 
+/* Loading and Error States */
+.loading-container,
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: #6c757d;
+}
+
+.loading-container {
+  background-color: #f8f9fa;
+}
+
+.error-container {
+  background-color: #f8d7da;
+  color: #721c24;
+}
 
 /*...........................experience...................... */
 

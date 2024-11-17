@@ -1,34 +1,31 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { scroller } from "react-scroll";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faGraduationCap, faTrophy, faCode, faEnvelope, faLock, faSignInAlt, faSignOutAlt, faBagShopping, faClock } from '@fortawesome/free-solid-svg-icons';
+import { 
+  faUser, 
+  faGraduationCap, 
+  faClock, 
+  faCode, 
+  faEnvelope, 
+  faLock, 
+  faSignInAlt, 
+  faSignOutAlt 
+} from '@fortawesome/free-solid-svg-icons';
 import { DataContext } from "../context/GlobalContext";
 
 const Navbar = () => {
   const state = useContext(DataContext);
   const [isLogin, setIsLogin] = state.isLogin;
-  const [toggle, setToggle] = useState(false);
 
-  // Improved scroll function
   const scrollToElement = (elementId) => {
     scroller.scrollTo(elementId, {
       duration: 800,
       delay: 0,
       smooth: 'easeInOutQuart',
-      offset: -70, 
+      offset: -70,
     });
-  };
-
-  const actToggle = () => {
-    setToggle(!toggle);
-  };
-
-  const closeNavbar = () => {
-    if (toggle === true) {
-      setToggle(false);
-    }
   };
 
   const logOutSubmit = () => {
@@ -36,65 +33,60 @@ const Navbar = () => {
     setIsLogin(false);
   };
 
-  // Combined click handler for navigation items
-  const handleNavClick = (elementId) => {
-    closeNavbar();
-    scrollToElement(elementId);
-  };
-
   return (
     <div className="nav-container">
       <nav>
         <div className="logoBtn">
-          <Link to="/" onClick={() => handleNavClick("home")}>
+          <Link to="/" onClick={() => scrollToElement("home")}>
             <span>Vartika Sharma</span>
           </Link>
-
-          <button className={`btn ${toggle ? 'animateBar' : ''}`} onClick={actToggle}>
-            <div className="bar1"></div>
-            <div className="bar2"></div>
-            <div className="bar3"></div>
-          </button>
         </div>
 
-        <div className={`links ${toggle ? 'new-links' : ''}`}>
+        <div className="links">
           <ul>
             <li>
-              <Link to="/" onClick={() => handleNavClick('about')}>
-                <FontAwesomeIcon icon={faUser} /> About
+              <Link to="/" onClick={() => scrollToElement('about')}>
+                <FontAwesomeIcon icon={faUser} />
+                <span>About</span>
               </Link>
             </li>
             <li>
-              <Link to="/" onClick={() => handleNavClick('education')}>
-                <FontAwesomeIcon icon={faGraduationCap} /> Education
+              <Link to="/" onClick={() => scrollToElement('education')}>
+                <FontAwesomeIcon icon={faGraduationCap} />
+                <span>Education</span>
               </Link>
             </li>
             <li>
-              <Link to="/" onClick={() => handleNavClick('experience')}>
-                <FontAwesomeIcon icon={faClock} /> Experience
+              <Link to="/" onClick={() => scrollToElement('experience')}>
+                <FontAwesomeIcon icon={faClock} />
+                <span>Experience</span>
               </Link>
             </li>
             <li>
-              <Link to="/" onClick={() => handleNavClick('projects')}>
-                <FontAwesomeIcon icon={faCode} /> Projects
+              <Link to="/" onClick={() => scrollToElement('projects')}>
+                <FontAwesomeIcon icon={faCode} />
+                <span>Projects</span>
               </Link>
             </li>
             <li>
-              <Link to="/" onClick={() => handleNavClick('contact')}>
-                <FontAwesomeIcon icon={faEnvelope} /> Contact
+              <Link to="/" onClick={() => scrollToElement('contact')}>
+                <FontAwesomeIcon icon={faEnvelope} />
+                <span>Contact</span>
               </Link>
             </li>
             
             <li className="icon-button" onClick={logOutSubmit}>
-              <Link to={isLogin ? "/" : "/login"} title={isLogin ? "Logout" : "Login"}>
+              <Link to={isLogin ? "/" : "/login"}>
                 <FontAwesomeIcon icon={isLogin ? faSignOutAlt : faSignInAlt} />
+                <span>{isLogin ? "Logout" : "Login"}</span>
               </Link>
             </li>
             
             {isLogin && (
               <li className="icon-button">
-                <Link to="/admin" title="Admin">
+                <Link to="/admin">
                   <FontAwesomeIcon icon={faLock} />
+                  <span>Admin</span>
                 </Link>
               </li>
             )}

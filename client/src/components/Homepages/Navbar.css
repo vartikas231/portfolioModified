@@ -1,145 +1,130 @@
 :root {
-  --primary-color: #9b59d1; /* Mystical purple */
-  --secondary-color: #2c1810; /* Dark brown */
-  --text-color: #e0e0ff; /* Soft white with blue tint */
-  --hover-color: #bd93f9; /* Lighter purple */
-  --bg-color: #0a0a0f; /* Very dark blue-black */
+  --primary-color: #9b59d1;
+  --secondary-color: #2c1810;
+  --text-color: #e0e0ff;
+  --hover-color: #bd93f9;
+  --bg-color: #0a0a0f;
 }
 
 .nav-container {
-  background-color: rgba(10, 10, 15, 0.95);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 10;
-  padding: 10px 20px;
-  box-shadow: 0 2px 15px rgba(155, 89, 209, 0.2);
-  backdrop-filter: blur(5px);
+  left: 0;
+  height: 100vh;
+  width: 80px; /* Narrow width */
+  background-color: rgba(10, 10, 15, 0.95);
+  transition: width 0.3s ease;
+  z-index: 1000;
+  overflow: hidden;
+  box-shadow: 2px 0 15px rgba(155, 89, 209, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.nav-container:hover {
+  width: 250px; /* Expand on hover */
 }
 
 nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1280px;
-  margin: 0 auto;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px 0;
 }
 
 .logoBtn {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.logoBtn a {
-  text-decoration: none;
-  color: var(--primary-color);
+  padding: 0 20px;
+  margin-bottom: 30px;
 }
 
 .logoBtn span {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--primary-color);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.btn {
-  display: none; /* Hide by default, show in mobile view */
+.nav-container:hover .logoBtn span {
+  opacity: 1;
 }
 
 .links {
-  display: flex;
+  flex-grow: 1;
 }
 
 .links ul {
   list-style: none;
-  display: flex;
-  align-items: center;
-  margin: 0;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .links li {
-  margin: 0 15px;
+  width: 100%;
 }
 
 .links li a {
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 1rem;
-  transition: 0.3s;
   display: flex;
   align-items: center;
-  gap: 5px;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: background-color 0.3s ease;
+}
+
+.links li a svg {
+  margin-right: 15px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.links li a span {
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-container:hover .links li a span {
+  opacity: 1;
 }
 
 .links li a:hover {
-  color: var(--hover-color);
+  background-color: rgba(155, 89, 209, 0.1);
 }
 
 .icon-button {
-  margin-left: 10px;
+  margin-top: auto;
 }
 
-.icon-button a {
-  padding: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
+/* Responsive adjustments */
 @media screen and (max-width: 768px) {
-  .btn {
-    display: block;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 5px;
+  .nav-container {
+    width: 60px;
   }
 
-  .bar1, .bar2, .bar3 {
-    width: 25px;
-    height: 3px;
-    background-color: var(--text-color);
-    margin: 6px 0;
-    transition: 0.4s;
-  }
-
-  .animateBar .bar1 {
-    transform: rotate(-45deg) translate(-5px, 6px);
-  }
-
-  .animateBar .bar2 {opacity: 0;}
-
-  .animateBar .bar3 {
-    transform: rotate(45deg) translate(-5px, -6px);
-  }
-
-  .links {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    background-color: var(--bg-color);
-    display: none;
-    flex-direction: column;
+  .nav-container:hover {
     width: 100%;
-    padding: 20px 0;
-    box-shadow: 0 2px 15px rgba(155, 89, 209, 0.2);
+    height: auto;
+    bottom: 0;
+    top: auto;
   }
 
-  .new-links {
-    display: flex;
+  nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .logoBtn {
+    margin-bottom: 0;
   }
 
   .links ul {
-    flex-direction: column;
+    flex-direction: row;
   }
 
-  .links li {
-    margin: 10px 0;
+  .links li a span {
+    display: none;
   }
 }

@@ -1,15 +1,17 @@
 import React, { useContext } from 'react'
-
-
-import {DataContext} from '../context/GlobalContext';
-
-
+import { DataContext } from '../context/GlobalContext';
 
 const Projects = () => {
+  const state = useContext(DataContext);
+  
+  // Add logging to understand the structure
+  console.log('Full state:', state);
+  console.log('Projects:', state.projects);
 
-const state=useContext(DataContext);
-const [projects]=state.projects
-
+  // Defensive programming
+  const projects = Array.isArray(state.projects) 
+    ? state.projects 
+    : (state.projects ? [state.projects] : []);
 
   return (
     <div className="main-container">
@@ -17,26 +19,29 @@ const [projects]=state.projects
         <h2 className="title">Projects</h2>
 
         <div className="projects-center">
-          {projects.map((item) => (
-            
-            <div className="single-project" key={item._id}>
-               
-              <div className="single-project-img">
-                {/*  */}
-                {/* yaha pr url nhi pohonch rha  */}
-                {/*  */}
-                {/* console.log(item); */}
-                <img src={item.images.url} alt="not found" />
-              </div>
-              <div className="single-project-info">
-                <h3>{item.title}</h3>
-                <p>
-                  {item.description}
-                  {/* console.log(item.images.url); */}
-                </p>
-              </div>
-            </div>
-          ))}
+          {projects.length === 0 ? (
+            <div>No projects found</div>
+          ) : (
+            projects.map((item) => {
+              // Add additional checks
+              console.log('Current project item:', item);
+              
+              return (
+                <div className="single-project" key={item._id}>
+                  <div className="single-project-img">
+                    <img 
+                      src={item.images?.url || 'default-image-url'} 
+                      alt={item.title || "Project Image"} 
+                    />
+                  </div>
+                  <div className="single-project-info">
+                    <h3>{item.title || 'Untitled Project'}</h3>
+                    <p>{item.description || 'No description available'}</p>
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
     </div>
@@ -44,7 +49,3 @@ const [projects]=state.projects
 }
 
 export default Projects
-
-
-
-

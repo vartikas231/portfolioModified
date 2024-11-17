@@ -27,11 +27,12 @@ const EditProjects = () => {
         const response = await axios.get(`http://localhost:2000/project/${id}`);
         
         if (response.data) {
-          const { product_id, title, description, images } = response.data;
+          const { product_id, title, description, images ,hostedlink } = response.data;
           setProducts({
             product_id,
             title,
             description,
+            hostedlink
           });
           setImages(images);
         }

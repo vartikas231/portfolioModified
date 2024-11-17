@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import './ProjectsAdmin.css';
+
 
 const initialState = {
   product_id: "",
@@ -8,6 +10,7 @@ const initialState = {
   description: "",
   hostedlink: ""
 };
+
 const ProjectsAdmin = () => {
   const [product, setProducts] = useState(initialState);
   const [images, setImages] = useState(false);
@@ -15,22 +18,22 @@ const ProjectsAdmin = () => {
   const [messageCond, setMessageCond] = useState(false);
   const [projectData, setProjectData] = useState([]);
 
-  // upload image functionality
-
+  // Upload image functionality
   const handleUpload = async (e) => {
     e.preventDefault();
 
     try {
       const file = e.target.files[0];
-      if (!file) return alert("no files exist");
+      console.log("Uploaded file:", file); // Debug log
+
+      if (!file) return alert("No files exist");
 
       if (file.size > 1024 * 1024) {
         return alert("Size is too big!");
       }
       if (file.type !== "image/jpeg" && file.type !== "image/png") {
-        return alert("Incorrect file format ! ");
+        return alert("Incorrect file format!");
       }
-      
 
       let formData = new FormData();
       formData.append("files", file);
@@ -38,198 +41,235 @@ const ProjectsAdmin = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
+      console.log("Upload response:", res.data); // Debug log
       setImages(res.data);
     } catch (error) {
-      console.log(error);
+      console.log("Upload error:", error); // Debug log
     }
   };
 
-  // delete image
+  // Delete image
+  const handleDestroy = async () => {
+    try {
+      console.log("Destroying image with public_id:", images.public_id); // Debug log
+      await axios.post("/destroy", { public_id: images.public_id });
+      setImages(false);
+    } catch (error) {
+      console.log("Destroy error:", error.response.data.msg); // Debug log
+    }
+  };
 
-    const handleDestroy = async () => {
-      try {
-        await axios.post("/destroy", { public_id: images.public_id });
-        setImages(false);
-      } catch (error) {
-        console.log(error.response.data.msg);
-      }
-    };
-
-    // handle change input
+  // Handle change input
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
+    console.log(`Changing ${name} to:`, value); // Debug log
 
     setProducts({ ...product, [name]: value });
   };
 
-//   // handle submit form
-
-  const handleSubmit = (e) => {
+  // Handle submit form
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("Submitting product:", { ...product, images }); // Debug log
       
-      axios.post('http://localhost:2000/project', { ...product, images }).then((res) => {
-        setMessage(res.data.msg);
-        setTimeout(() => {
-          setMessage("");
-        }, 2000)
+      const res = await axios.post('http://localhost:2000/project', { ...product, images });
+      console.log("Submit response:", res.data); // Debug log
+      setMessage(res.data.msg);
+      setTimeout(() => {
+        setMessage("");
+      }, 2000);
 
-        setProducts(initialState);
-        setImages(false);
-      });
+      setProducts(initialState);
+      setImages(false);
+      fetchProjects(); // Refresh project list after submission
     } catch (error) {
-      console.log(error);
+      console.log("Submit error:", error); // Debug log
     }
   };
 
   const styleUpload = {
-    display:images? 'block' : 'none'
-  }
+    display: images ? 'block' : 'none'
+  };
 
-  // fetching th data
+  // Fetching the data
+  const fetchProjects = async () => {
+    try {
+      const res = await axios.get("http://localhost:2000/project");
+      console.log("Fetched project data:", res.data); // Debug log
 
-  useEffect(() => {
-    const fetchData = async() => {
-      try {
-        const res = await axios.get("http://localhost:2000/project");
-        setProjectData(res.data);
-        // console.log(res.data);
-      } catch (error) {
-        console.log(error);
-      }
+      // Ensure that the response is an array
+      const projectArray = Array.isArray(res.data.data) ? res.data.data : [];
+      setProjectData(projectArray);
+    } catch (error) {
+      console.log("Fetch data error:", error); // Debug log
     }
-      fetchData();
+  };
+
+  // Initial fetch
+  useEffect(() => {
+    fetchProjects();
   }, []);
 
+  // Delete functionality
+  const deleteProject = async (id) => {
+    console.log("Deleting project with id:", id); // Debug log
 
+    try {
+      const res = await axios.delete(`http://localhost:2000/project/${id}`);
+      console.log("Delete response:", res.data); // Debug log
+      setMessageCond(true);
+      setMessage(res.data.msg);
+      setTimeout(() => {
+        setMessageCond(false);
+        setMessage("");
+      }, 2000);
 
-
-  // delete functionality
-  const deleteProject=(id)=>{
-
-axios.delete(`http://localhost:2000/project/${id}`).then((res) => {
-  setMessageCond(true);
-  setMessage(res.data.msg);
-  setTimeout(() => {
-    setMessageCond(false);
-    setMessage("");
-  }, 2000);
-});
-
-// delete from client uI
-const filteredProject = projectData.filter((item) => item._id !== id);
-setProjectData(filteredProject);
-  }
+      // Update local state
+      setProjectData((prev) => prev.filter((item) => item._id !== id));
+    } catch (error) {
+      console.log("Delete error:", error); // Debug log
+    }
+  };
 
   return (
-    <div className="same-component">
-      <div className="same-form">
-        <form onSubmit={handleSubmit}>
-          <h4>Project Components</h4>
-          <label htmlFor="text">id</label>
-          <input
-            type="text"
-            name="product_id"
-            id="product-id"
-            value={product.product_id}
-            onChange={handleChangeInput}
-            required
-          />
-
-          <label htmlFor="text">Title</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            value={product.title}
-            onChange={handleChangeInput}
-            required
-          />
-
-          <label htmlFor="text">Description</label>
-          <textarea
-            name="description"
-            id="description"
-            value={product.description}
-            onChange={handleChangeInput}
-            required
-            cols="30"
-            rows="3"
-          />
-
-          <div className="form-group">
-            <label htmlFor="hostedlink">Hosted Link</label>
+    <div className="projects-admin-container">
+      <div className="projects-form-section">
+        <form onSubmit={handleSubmit} className="projects-form">
+          <h2 className="projects-form-title">Add New Project</h2>
+          
+          <div className="projects-form-group">
+            <label htmlFor="project-id">Project ID</label>
             <input
               type="text"
+              name="product_id"
+              id="project-id"
+              value={product.product_id}
+              onChange={handleChangeInput}
+              required
+              className="projects-form-input"
+            />
+          </div>
+
+          <div className="projects-form-group">
+            <label htmlFor="project-title">Project Title</label>
+            <input
+              type="text"
+              name="title"
+              id="project-title"
+              value={product.title}
+              onChange={handleChangeInput}
+              required
+              className="projects-form-input"
+            />
+          </div>
+
+          <div className="projects-form-group">
+            <label htmlFor="project-description">Description</label>
+            <textarea
+              name="description"
+              id="project-description"
+              value={product.description}
+              onChange={handleChangeInput}
+              required
+              className="projects-form-textarea"
+              rows="4"
+            />
+          </div>
+
+          <div className="projects-form-group">
+            <label htmlFor="project-hostedlink">Project URL</label>
+            <input
+              type="url"
               name="hostedlink"
-              id="hostedlink"
+              id="project-hostedlink"
               value={product.hostedlink}
               onChange={handleChangeInput}
               required
+              className="projects-form-input"
+              placeholder="https://example.com"
             />
           </div>
 
-          <div className="upload">
+          <div className="projects-upload-section">
             <input
               type="file"
               name="file"
-              id="file_up"
+              id="projects-file-up"
               onChange={handleUpload}
+              className="projects-file-input"
             />
-
-            <div id="file_img" style={styleUpload}>
-              <img src={images ? images.url : ""} alt="" />
-              <span onClick={handleDestroy}>X</span>
-            </div>
+            
+            {images && (
+              <div className="projects-uploaded-image-preview">
+                <img src={images.url} alt="Uploaded" />
+                <button 
+                  type="button" 
+                  onClick={handleDestroy} 
+                  className="projects-remove-image-btn"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
           </div>
           
-          <button>Add item</button>
-         
+          <button type="submit" className="projects-submit-btn">
+            Add Project
+          </button>
         </form>
       </div>
 
-      <div className="same-item">
-        <div className="about-info">
-          {projectData.map((item) => (
-            <div className="projects-admin" key={item._id}>
-              <div className="icons">
-                <Link to={`/editProject/${item._id}`}>
-                  <i className="fas fa-edit"></i>
-                </Link>
+      <div className="projects-list-section">
+        <h2 className="projects-section-title">Existing Projects</h2>
+        
+        <div className="projects-grid">
+          {projectData.length > 0 ? (
+            projectData.map((project) => (
+              <div key={project._id} className="projects-card">
+                <div className="projects-card-actions">
+                  <Link 
+                    to={`/editProject/${project._id}`} 
+                    className="projects-edit-btn"
+                  >
+                    <i className="fas fa-edit"></i>
+                  </Link>
+                  <button 
+                    onClick={() => deleteProject(project._id)} 
+                    className="projects-delete-btn"
+                  >
+                    <i className="fas fa-trash"></i>
+                  </button>
+                </div>
 
-                <i
-                  className="fas fa-trash"
-                  onClick={() => deleteProject(item._id)}
-                ></i>
+                <div className="projects-card-image">
+                  <img 
+                    src={project.images?.url || 'fallback-image.png'} 
+                    alt={project.title} 
+                  />
+                </div>
+
+                <div className="projects-card-content">
+                  <h3 className="projects-title">{project.title}</h3>
+                  <p className="projects-description">{project.description}</p>
+                  
+                  <div className="projects-links">
+                    <a 
+                      href={project.hostedlink} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="projects-view-btn"
+                    >
+                      View Project
+                      <i className="fas fa-external-link-alt"></i>
+                    </a>
+                  </div>
+                </div>
               </div>
-
-              {/* single project */}
-
-                      <div className="single-project">
-          <div className="single-project-img">
-            <a href={item.hostedlink} target="_blank" rel="noopener noreferrer">
-              <img src={item.images.url} alt="" />
-            </a>
-          </div>
-
-          <div className="single-project-info">
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-            <a href={item.hostedlink} target="_blank" rel="noopener noreferrer">View Project</a>
-          </div>
-        </div>
-
-              <h3
-                className={
-                  setMessageCond
-                    ? "new-delete item-delete-tab "
-                    : "item-delete-tab"
-                }
-              >
-                {message}
-              </h3>
-            </div>
-          ))}
+            ))
+          ) : (
+            <div className="projects-no-projects">No projects found</div>
+          )}
         </div>
       </div>
     </div>

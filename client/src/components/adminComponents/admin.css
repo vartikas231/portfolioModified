@@ -313,3 +313,174 @@ form button:hover{
     border-radius: 50% ;
 
 }
+
+/* ExperiencesAdmin Component Styles */
+
+.admin-experience-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #121212; /* Dark background */
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.admin-experience-form {
+    background-color: #1e1e1e; /* Slightly lighter dark gray */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.form-title {
+    color: #ff79c6; /* Bright pink text */
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5em; /* Slightly larger font size */
+}
+
+.admin-experience-form input,
+.admin-experience-form textarea {
+    background-color: #282a36; /* Darker gray background */
+    border: 1px solid #6272a4; /* Light blue border */
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    color: #f8f8f2; /* Light text for better readability */
+    transition: border-color 0.3s ease;
+}
+
+.admin-experience-form input:focus,
+.admin-experience-form textarea:focus {
+    border-color: #50fa7b; /* Green border on focus */
+    outline: none; /* Remove default outline */
+}
+
+.admin-experience-form button {
+    background-color: #ff79c6; /* Bright pink background */
+    color: #fff; /* White text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.admin-experience-form button:hover {
+    background-color: #ff92d0; /* Lighter pink on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.admin-experience-list {
+    margin: 20px 0;
+    border: 1px solid #444; /* Dark gray border */
+    padding: 10px;
+    position: relative;
+    background-color: #1e1e1e; /* Slightly lighter dark gray for the list */
+    border-radius: 15px;
+}
+
+.experience-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between experiences */
+}
+
+.admin-experience-item {
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #2a2a2a; /* Darker gray background for items */
+}
+
+.admin-experience-item:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Deeper shadow on hover */
+}
+
+.admin-experience-icons {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.admin-experience-icons i {
+    color: #ff79c6; /* Bright pink icons */
+    margin-left: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.admin-experience-icons i:hover {
+    color: #ff92d0; /* Lighter pink on hover */
+}
+
+.admin-single-experience h3 {
+    color: #ff79c6; /* Bright pink text */
+    margin-bottom: 10px;
+    font-family: 'Arial', sans-serif;
+}
+
+.admin-single-experience p {
+    color: #f8f8f2; /* Light text for better readability */
+    margin-bottom: 5px;
+}
+
+.admin-single-experience ul {
+    list-style-type: none; /* Remove default list styling */
+    padding-left: 0;
+}
+
+.admin-single-experience ul li {
+    color: #f8f8f2; /* Light text for better readability */
+    margin-bottom: 5px;
+    position: relative;
+ }
+
+.admin-single-experience ul li::before {
+    content: '★'; /* Star character */
+    color: #ff79c6; /* Bright pink color for stars */
+    margin-right: 5px;
+}
+
+.admin-item-delete-tab {
+    background: rgb(236, 106, 132);
+    text-align: center;
+    font-style: italic;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    width: 400px;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 10px; /* Rounded corners for delete tab */
+    transition: background-color 0.3s ease;
+}
+
+.admin-item-delete-tab:hover {
+    background: rgb(220, 90, 120); /* Darker shade on hover */
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .admin-experience-container {
+        padding: 15px;
+    }
+
+    .admin-experience-form {
+        padding: 15px;
+    }
+
+    .admin-experience-list {
+        padding: 15px;
+    }
+
+    .admin-experience-item {
+        padding: 10px;
+    }
+
+    .admin-item-delete-tab {
+        width: 100%; /* Full width on smaller screens */
+    }
+}

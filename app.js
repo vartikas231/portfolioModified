@@ -41,7 +41,7 @@ app.use('/contact', require("./routes/contactRoute"));
 app.use('/user', require("./routes/userRoute"));
 app.use('/', require("./routes/aboutRoute"));
 app.use('/', require("./routes/educRoute"));
-app.use('/', require("./routes/experienceRoute.js"));
+app.use('/', require("./routes/experienceRoute"));
 app.use('/', require("./routes/projectRoute"));
 app.use('/', require("./routes/upload"));
 
