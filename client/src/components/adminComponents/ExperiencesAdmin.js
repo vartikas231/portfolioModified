@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import './admin.css';
+import API_BASE_URL from "../../apiConfig";
+
 
 const ExperiencesAdmin = () => {
   const [experience, setExperience] = useState({
@@ -20,7 +22,7 @@ const ExperiencesAdmin = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:2000/experience`);
+        const res = await axios.get(`${API_BASE_URL}/experience`);
         setExperienceData(res.data);
       } catch (error) {
         console.error("Error fetching experience data:", error);
@@ -47,7 +49,7 @@ const ExperiencesAdmin = () => {
     };
 
     try {
-      const res = await axios.post(`http://localhost:2000/experience`, postExperience);
+      const res = await axios.post(`${API_BASE_URL}/experience`, postExperience);
       setExperienceData([...experienceData, res.data]);
       setExperience({
         role: "",
@@ -68,7 +70,7 @@ const ExperiencesAdmin = () => {
 
   const deleteExperience = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:2000/experience/${id}`);
+      const res = await axios.delete(`${API_BASE_URL}/experience/${id}`);
       setMessageCond(true);
       setMessage(`${res.data.msg}`);
       setExperienceData(experienceData.filter((item) => item._id !== id));

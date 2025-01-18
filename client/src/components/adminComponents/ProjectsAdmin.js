@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import './ProjectsAdmin.css';
+import API_BASE_URL from "../../apiConfig";
 
 
 const initialState = {
@@ -73,7 +74,7 @@ const ProjectsAdmin = () => {
     try {
       console.log("Submitting product:", { ...product, images }); // Debug log
       
-      const res = await axios.post('http://localhost:2000/project', { ...product, images });
+      const res = await axios.post('${API_BASE_URL}/project', { ...product, images });
       console.log("Submit response:", res.data); // Debug log
       setMessage(res.data.msg);
       setTimeout(() => {
@@ -95,7 +96,7 @@ const ProjectsAdmin = () => {
   // Fetching the data
   const fetchProjects = async () => {
     try {
-      const res = await axios.get("http://localhost:2000/project");
+      const res = await axios.get("${API_BASE_URL}/project");
       console.log("Fetched project data:", res.data); // Debug log
 
       // Ensure that the response is an array
@@ -116,7 +117,7 @@ const ProjectsAdmin = () => {
     console.log("Deleting project with id:", id); // Debug log
 
     try {
-      const res = await axios.delete(`http://localhost:2000/project/${id}`);
+      const res = await axios.delete(`${API_BASE_URL}/project/${id}`);
       console.log("Delete response:", res.data); // Debug log
       setMessageCond(true);
       setMessage(res.data.msg);

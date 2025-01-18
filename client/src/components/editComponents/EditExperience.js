@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_BASE_URL from "../../apiConfig";
+
 
 const EditExperience = () => {
     const { id } = useParams();
@@ -18,7 +20,7 @@ const EditExperience = () => {
     useEffect(() => {
         const fetchExperience = async () => {
             try {
-                const response = await axios.get(`http://localhost:2000/experience/${id}`);
+                const response = await axios.get(`${API_BASE_URL}/experience/${id}`);
                 const data = response.data;
                 setExperience({
                     ...data,
@@ -55,7 +57,7 @@ const EditExperience = () => {
                 achievements: experience.achievements.split('\n').filter(item => item.trim() !== '')
             };
 
-            const response = await axios.put(`http://localhost:2000/experience/${id}`, updateData);
+            const response = await axios.put(`${API_BASE_URL}/experience/${id}`, updateData);
             
             if (response.data) {
                 navigate('/experiences-admin'); // Redirect after successful update

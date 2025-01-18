@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { createContext, useState, useEffect, useCallback } from 'react';
+import API_BASE_URL from "../../apiConfig";
 
 export const DataContext = createContext();
 
-const API_BASE_URL = 'http://localhost:2000'; // Move this to an environment variable in production
+// const API_BASE_URL = '${API_BASE_URL}'; // Move this to an environment variable in production
 
 export const DataProvider = ({ children }) => {
   // State Management

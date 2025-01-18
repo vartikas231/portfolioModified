@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./admin.css";
+import API_BASE_URL from "../../apiConfig";
+
 import axios from "axios";
 
 const AboutAdmin = () => {
@@ -18,7 +20,7 @@ const AboutAdmin = () => {
   const fetchAboutData = async () => {
     try {
       setIsLoading(true);
-      const res = await axios.get(`http://localhost:2000/about`);
+      const res = await axios.get(`${API_BASE_URL}/about`);
       setAboutData(res.data);
       setError(null);
     } catch (error) {
@@ -47,7 +49,7 @@ const AboutAdmin = () => {
     try {
       setIsLoading(true);
       const postAbout = { about };
-      const response = await axios.post(`http://localhost:2000/about`, postAbout);
+      const response = await axios.post(`${API_BASE_URL}/about`, postAbout);
       
       // Update UI immediately
       setAboutData([...aboutData, response.data]);
@@ -66,7 +68,7 @@ const AboutAdmin = () => {
   const handleDelete = async (id) => {
     try {
       setIsLoading(true);
-      await axios.delete(`http://localhost:2000/about/${id}`);
+      await axios.delete(`${API_BASE_URL}/about/${id}`);
       
       // Update UI immediately
       setAboutData(aboutData.filter(item => item._id !== id));

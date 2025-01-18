@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./edit.css"
 import axios from "axios";
+import API_BASE_URL from "../../apiConfig";
+
 
 const initialState = {
   product_id: "",
@@ -24,7 +26,7 @@ const EditProjects = () => {
     const fetchProject = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:2000/project/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/project/${id}`);
         
         if (response.data) {
           const { product_id, title, description, images ,hostedlink } = response.data;
@@ -70,7 +72,7 @@ const EditProjects = () => {
       formData.append("file", file);
   
       setLoading(true);
-      const response = await axios.post("http://localhost:2000/upload", formData, {
+      const response = await axios.post("${API_BASE_URL}/upload", formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       setImages(response.data);
@@ -86,7 +88,7 @@ const EditProjects = () => {
       if (!images.public_id) return;
       
       setLoading(true);
-      await axios.post("http://localhost:2000/destroy", { public_id: images.public_id });
+      await axios.post("${API_BASE_URL}/destroy", { public_id: images.public_id });
       setLoading(false);
       setImages(false);
     } catch (error) {
@@ -112,7 +114,7 @@ const EditProjects = () => {
       }
   
       setLoading(true);
-      const response = await axios.put(`http://localhost:2000/project/${id}`, {
+      const response = await axios.put(`${API_BASE_URL}/project/${id}`, {
         product_id: product.product_id,
         title: product.title,
         description: product.description,

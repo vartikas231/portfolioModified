@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import API_BASE_URL from "../../apiConfig";
+
 
 const EducationAdmin = () => {
   const [education, setEducation] = useState('');
@@ -34,7 +36,7 @@ const EducationAdmin = () => {
     setEducation("");
 
     axios
-      .post(`http://localhost:2000/education`, postEducation)
+      .post(`${API_BASE_URL}/education`, postEducation)
       .then((res) => {
         setMessage(res.data.msg);
         setMessageCond(true);

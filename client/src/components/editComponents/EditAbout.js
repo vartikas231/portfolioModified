@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./edit.css";
 import axios from 'axios';
+import API_BASE_URL from "../../apiConfig";
+
 
 const EditAbout = () => {
   const [about, setAbout] = useState("");
@@ -11,7 +13,7 @@ const EditAbout = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:2000/about/${id}`)
+      .get(`${API_BASE_URL}/about/${id}`)
       .then((res) => {
         setAbout(res.data.about);
       })
@@ -27,7 +29,7 @@ const EditAbout = () => {
     const postAbout = {
       about
     };
-    axios.put(`http://localhost:2000/about/update/${id}`, postAbout)
+    axios.put(`${API_BASE_URL}/about/update/${id}`, postAbout)
       .then((res) => {
         setMessage(res.data.msg);
         setTimeout(() => {

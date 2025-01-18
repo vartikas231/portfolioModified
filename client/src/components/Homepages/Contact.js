@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import './contact.css'
 import axios from 'axios'
+import API_BASE_URL from "../../apiConfig";
+
 
 
 const Contact = () => {
@@ -46,7 +48,7 @@ const formSubmit=(e)=>{
 
 
   setBool(true);
-  axios.post(`http://localhost:2000/contact`,data)
+  axios.post(`${API_BASE_URL}/contact`,data)
   .then(res=>{
     setBanner(res.data.msg);
     setBool(false);

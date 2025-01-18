@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import API_BASE_URL from "../../apiConfig";
+
 import './login.css';
 import { DataContext } from '../context/GlobalContext';
 
@@ -21,7 +23,7 @@ const Login = () => {
   const loginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:2000/user/login`, {
+      const res = await axios.post(`${API_BASE_URL}/user/login`, {
         email: user.email,
         password: user.password,
       });
@@ -38,7 +40,7 @@ const Login = () => {
   const registerSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:2000/user/register`, {
+      const res = await axios.post(`${API_BASE_URL}/user/register`, {
         username: user.username,
         email: user.email,
         password: user.password,

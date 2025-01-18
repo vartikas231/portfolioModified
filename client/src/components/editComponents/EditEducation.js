@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from "../../apiConfig";
+
 
 const EditEducation = () => {
   const [education, setEducation] = useState('');
@@ -12,7 +14,7 @@ const EditEducation = () => {
   useEffect(() => {
     const fetchEducation = async () => {
       try {
-        const response = await axios.get(`http://localhost:2000/education/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/education/${id}`);
         setEducation(response.data.education);
       } catch (error) {
         console.error('Error fetching education:', error);
@@ -30,7 +32,7 @@ const EditEducation = () => {
     try {
       // Using your existing update route
       const response = await axios.put(
-        `http://localhost:2000/education/update/${id}`,
+        `${API_BASE_URL}/education/update/${id}`,
         { education }
       );
 
