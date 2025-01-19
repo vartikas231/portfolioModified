@@ -1,0 +1,99 @@
+.
+├── 1.txt
+├── Procfile
+├── app.js
+├── client
+│   ├── README.md
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   ├── logo192.png
+│   │   ├── logo512.png
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   └── src
+│       ├── App copy.css
+│       ├── App.css
+│       ├── App.js
+│       ├── App.test.js
+│       ├── apiConfig.js
+│       ├── components
+│       │   ├── Homepages
+│       │   │   ├── About.js
+│       │   │   ├── Contact.js
+│       │   │   ├── Education.css
+│       │   │   ├── Education.js
+│       │   │   ├── Experience.js
+│       │   │   ├── Footer.js
+│       │   │   ├── Header.js
+│       │   │   ├── Layout.js
+│       │   │   ├── Login.js
+│       │   │   ├── Main.js
+│       │   │   ├── Navbar.css
+│       │   │   ├── Navbar.js
+│       │   │   ├── Projects.js
+│       │   │   ├── Register.js
+│       │   │   ├── contact.css
+│       │   │   └── login.css
+│       │   ├── adminComponents
+│       │   │   ├── AboutAdmin.js
+│       │   │   ├── Admin.js
+│       │   │   ├── EducationAdmin.js
+│       │   │   ├── ExperiencesAdmin.js
+│       │   │   ├── ProjectsAdmin.css
+│       │   │   ├── ProjectsAdmin.js
+│       │   │   └── admin.css
+│       │   ├── context
+│       │   │   └── GlobalContext.js
+│       │   └── editComponents
+│       │       ├── EditAbout.js
+│       │       ├── EditEducation.js
+│       │       ├── EditExperience.js
+│       │       ├── EditProjects.js
+│       │       └── edit.css
+│       ├── images
+│       │   ├── backgroud.jpg
+│       │   ├── download.jfif
+│       │   ├── download.jpg
+│       │   ├── im4.jpg
+│       │   ├── logo.jpg
+│       │   ├── stopwatch.jpg
+│       │   ├── vartika.jpeg
+│       │   └── vartika.jpg
+│       ├── index.css
+│       ├── index.js
+│       ├── reportWebVitals.js
+│       ├── setupProxy.js
+│       └── setupTests.js
+├── controlers
+│   ├── aboutCtrl.js
+│   ├── educationCtrl.js
+│   ├── experienceCtrl.js
+│   ├── projectsCtrl.js
+│   └── userCtrl.js
+├── download.jfif
+├── middlewares
+│   ├── auth.js
+│   └── models
+│       ├── aboutModel.js
+│       ├── educationModel.js
+│       ├── experienceModel.js
+│       ├── projectModel.js
+│       └── userModel.js
+├── package-lock.json
+├── package.json
+├── project-structure.txt
+├── routes
+│   ├── aboutRoute.js
+│   ├── contactRoute.js
+│   ├── educRoute.js
+│   ├── experienceRoute.js
+│   ├── projectRoute.js
+│   ├── upload.js
+│   └── userRoute.js
+├── settings.json
+└── vercel.json
+
+14 directories, 83 files
