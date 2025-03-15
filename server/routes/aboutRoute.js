@@ -8,7 +8,7 @@ const {
   addAbout,
   updateAbout,
   delAbout
-} = require("../controlers/aboutCtrl");
+} = require("../controllers/aboutCtrl");
 
 // const aboutSchema=require('../middlewares/models/aboutModel');
 // .......................about..........................

@@ -1,7 +1,4 @@
 .
-├── 1.txt
-├── Procfile
-├── app.js
 ├── client
 │   ├── README.md
 │   ├── package-lock.json
@@ -14,7 +11,6 @@
 │   │   ├── manifest.json
 │   │   └── robots.txt
 │   └── src
-│       ├── App copy.css
 │       ├── App.css
 │       ├── App.js
 │       ├── App.test.js
@@ -54,9 +50,7 @@
 │       │       ├── EditProjects.js
 │       │       └── edit.css
 │       ├── images
-│       │   ├── backgroud.jpg
 │       │   ├── download.jfif
-│       │   ├── download.jpg
 │       │   ├── im4.jpg
 │       │   ├── logo.jpg
 │       │   ├── stopwatch.jpg
@@ -64,36 +58,41 @@
 │       │   └── vartika.jpg
 │       ├── index.css
 │       ├── index.js
-│       ├── reportWebVitals.js
-│       ├── setupProxy.js
-│       └── setupTests.js
-├── controlers
-│   ├── aboutCtrl.js
-│   ├── educationCtrl.js
-│   ├── experienceCtrl.js
-│   ├── projectsCtrl.js
-│   └── userCtrl.js
-├── download.jfif
-├── middlewares
-│   ├── auth.js
-│   └── models
-│       ├── aboutModel.js
-│       ├── educationModel.js
-│       ├── experienceModel.js
-│       ├── projectModel.js
-│       └── userModel.js
+│       └── reportWebVitals.js
 ├── package-lock.json
 ├── package.json
-├── project-structure.txt
-├── routes
-│   ├── aboutRoute.js
-│   ├── contactRoute.js
-│   ├── educRoute.js
-│   ├── experienceRoute.js
-│   ├── projectRoute.js
-│   ├── upload.js
-│   └── userRoute.js
-├── settings.json
-└── vercel.json
+├── project_structure.txt
+└── server
+    ├── app.js
+    ├── controlers
+    │   ├── aboutCtrl.js
+    │   └── userCtrl.js
+    ├── controllers
+    │   ├── aboutCtrl.js
+    │   ├── controlers
+    │   │   ├── aboutCtrl.js
+    │   │   └── userCtrl.js
+    │   ├── educationCtrl.js
+    │   ├── experienceCtrl.js
+    │   ├── projectsCtrl.js
+    │   └── userCtrl.js
+    ├── middlewares
+    │   ├── auth.js
+    │   └── models
+    │       ├── aboutModel.js
+    │       ├── educationModel.js
+    │       ├── experienceModel.js
+    │       ├── projectModel.js
+    │       └── userModel.js
+    ├── package-lock.json
+    ├── routes
+    │   ├── aboutRoute.js
+    │   ├── contactRoute.js
+    │   ├── educRoute.js
+    │   ├── experienceRoute.js
+    │   ├── projectRoute.js
+    │   ├── upload.js
+    │   └── userRoute.js
+    └── settings.json
 
-14 directories, 83 files
+17 directories, 79 files

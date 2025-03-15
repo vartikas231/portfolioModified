@@ -1,7 +1,7 @@
 // const { appendFile } = require('fs');
 
 const router = require("express").Router();
- require("../controlers/educationCtrl");
+ require("../controllers/educationCtrl");
 
 
 const {
@@ -10,7 +10,7 @@ const {
   addEducation,
   updateEducation,
   delEducation,
-} = require("../controlers/educationCtrl");
+} = require("../controllers/educationCtrl");
 
 
 const educationSchema = require("../middlewares/models/educationModel");

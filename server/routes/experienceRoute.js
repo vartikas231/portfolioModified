@@ -5,7 +5,7 @@ const {
   addExperience,
   updateExperience,
   deleteExperience,
-} = require("../controlers/experienceCtrl");
+} = require("../controllers/experienceCtrl");
 
 // Get all experiences
 router.get("/experience", getExperiences);
