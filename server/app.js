@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 
-// const PORT = process.env.PORT || 2000;
-const PORT = 2000;
+const PORT = process.env.PORT || 2000;
+// const PORT = 2000;
 
 const fileUpload = require("express-fileupload");
 const path =require('path')
@@ -37,13 +37,13 @@ mongoose
   });
 
 // routes
-app.use('/contact', require("./routes/contactRoute"));
-app.use('/user', require("./routes/userRoute"));
-app.use('/', require("./routes/aboutRoute"));
-app.use('/', require("./routes/educRoute"));
-app.use('/', require("./routes/experienceRoute"));
-app.use('/', require("./routes/projectRoute"));
-app.use('/', require("./routes/upload"));
+app.use('/contact', require("../routes/contactRoute"));
+app.use('/user', require("../routes/userRoute"));
+app.use('/', require("../routes/aboutRoute"));
+app.use('/', require("../routes/educRoute"));
+app.use('/', require("../routes/experienceRoute"));
+app.use('/', require("../routes/projectRoute"));
+app.use('/', require("../routes/upload"));
 
 
 
