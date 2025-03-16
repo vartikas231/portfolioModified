@@ -14,7 +14,7 @@ const EducationAdmin = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:2000/education`);
+        const res = await axios.get(`${API_BASE_URL}/education`);
         setEducationData(res.data);
       } catch (error) {
         console.log(error);
@@ -51,7 +51,7 @@ const EducationAdmin = () => {
 
   const deleteEducation = (id) => {
     axios
-      .delete(`http://localhost:2000/education/${id}`)
+      .delete(`${API_BASE_URL}/education/${id}`)
       .then((res) => {
         setMessageCond(true);
         setMessage(`${res.data.msg}`);
